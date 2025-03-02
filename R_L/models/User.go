@@ -17,7 +17,7 @@ type User struct {
 }
 
 // BeforeCreate 钩子函数，在创建记录前执行
-func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
+func (u *User) BeforeCreate() (err error) {
 	// 如果 NickName 为空，设置默认值
 	if u.NickName == "" {
 		u.NickName = "user"
