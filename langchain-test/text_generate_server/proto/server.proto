@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package streaming_model;
+
+option go_package = ".;streaming_model";
+
+// 定义 ModelService 服务
+service ModelService {
+  // 服务器端流式 RPC 方法：客户端发送一个字符串请求，服务器流式返回 token
+  rpc GenerateContentStream(Request) returns (stream Response) {}
+}
+
+// 请求消息：客户端发送一个字符串作为生成内容的请求
+message Request {
+  string prompt = 1; // 用户的输入
+}
+
+// 响应消息：服务器流式返回的单个 token
+message Response {
+  string token = 1; // 得到大模型的输出token
+}
