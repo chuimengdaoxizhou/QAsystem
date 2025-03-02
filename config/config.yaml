@@ -1,11 +1,11 @@
 app:
   name: "qasystem"
   environment: "development"
+  port: "8080"
+
 jwt:
   secret_key: "qasystem"
 
-server:
-  port: "8080"
 
 database:
   driver: mysql

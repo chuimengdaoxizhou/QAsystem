@@ -9,15 +9,13 @@ import (
 type Appconfig struct {
 	Name        string `mapstructure:"name"`
 	Development string `mapstructure:"development"`
+	Port        string `mapstructure:"port"`
 }
 
 type Jwtconfig struct {
 	secretKey string `mapstructure:"secret_key"`
 }
 
-type Serverconfig struct {
-	Port string `mapstructure:"port"`
-}
 type DatabaseConfig struct {
 	Driver    string `mapstructure:"driver"`
 	Host      string `mapstructure:"host"`
@@ -33,7 +31,6 @@ type DatabaseConfig struct {
 type Config struct {
 	App      Appconfig
 	Jwt      Jwtconfig
-	Server   Serverconfig
 	Database DatabaseConfig
 }
 
@@ -65,11 +62,6 @@ func GetConfig() Config {
 func (c *Config) Getapp() Appconfig {
 	appconfig := c.App
 	return appconfig
-}
-
-func (c *Config) Getserverport() string {
-	port := c.Server.Port
-	return port
 }
 
 func (c *Config) GetDatabasedsn() string {

@@ -10,7 +10,7 @@ func InitDB() *gorm.DB {
 	// 获取配置文件
 	con := GetConfig()
 	// 获取连接数据库的dsn
-	dsn := con.GetDatabaseDSN()
+	dsn := con.GetDatabasedsn()
 	// 连接mysql数据库
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {

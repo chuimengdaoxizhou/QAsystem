@@ -38,35 +38,6 @@ func GenerateToken(userID int64, username string) (string, error) {
 	return signedToken, nil
 }
 
-// ParseToken 解析和验证 JWT
-func ParseToken(tokenString string) (*models.Claims, error) {
-	claims := &models.Claims{}
-
-	// 获取配置实例
-	conf := config.GetConfig()
-	jwtSecret := conf.GetsecretKey() // 获取 JWT 密钥
-
-	// 解析和验证 Token
-	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-		// 检查签名方法是否正确
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
-		}
-
-		return jwtSecret, nil
-	})
-
-	if err != nil {
-		return nil, fmt.Errorf("invalid token: %w", err)
-	}
-
-	// 验证 Token 是否有效
-	if claims, ok := token.Claims.(*models.Claims); ok && token.Valid {
-		return claims, nil
-	}
-
-	return nil, errors.New("invalid token")
-}
 func ParseJWT(tokenString string) (string, error) {
 	con := config.GetConfig()
 	secertKey := con.GetsecretKey()
